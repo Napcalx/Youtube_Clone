@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { Typography, Box, Stack } from '@mui/material';
@@ -14,16 +14,15 @@ const VideoDetail = () => {
 
   useEffect(() => {
     fetchFromAPI(`videos?part=snippet,statistics&id=${id}`)
-      .then((data) => setVideoDetail(data.items[0]));
+      .then((data) => setVideoDetail(data.items[0]))
 
     fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
-      .then((data) => setVideos(data.item[0]));
+      .then((data) => setVideos(data.item[0]))
   }, [id]);
 
-  if( !videoDetail?.snippet) return 'Loading...';
+  if(!videoDetail?.snippet) return 'Loading...';
 
-  const { snippet : { title, channelId, channelTitle }, statistics: {
-    viewCount, likeCount } } = videoDetail;
+  const { snippet : { title, channelId, channelTitle }, statistics: {viewCount, likeCount } } = videoDetail;
 
   return (
     <Box minHeight="95vh">
@@ -59,7 +58,7 @@ const VideoDetail = () => {
         </Box>
       </Stack>
     </Box>
-  )
-}
+  );
+};
 
-export default VideoDetail
+export default VideoDetail;
